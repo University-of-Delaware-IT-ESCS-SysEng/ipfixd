@@ -1,0 +1,2 @@
+# Ignore .c files created by Cythton
+*.c
