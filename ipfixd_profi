@@ -1,0 +1,9 @@
+#!/usr/bin/python3.11 -tt 
+
+import ipfixd_app.main
+import cProfile
+
+try:
+    exit( cProfile.run( 'ipfixd_app.main.main()' ) )
+except KeyboardInterrupt:
+    pass

@@ -1,0 +1,3 @@
+Need an internal packet list between the packet processor and
+the writer.  I suspect all those buffers being added to the writer
+queue are slowing things down with thread calls.

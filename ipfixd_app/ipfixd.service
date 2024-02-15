@@ -1,0 +1,20 @@
+# Unfinished.  This is not a systemd system!
+
+[Unit]
+Description=Saves IPFIXD and NetFlow V5 data
+AssertPathExists=/netflow/hh-router/save
+AssertPathExists=/netflow/lerner-core1/save
+
+[Service]
+User=netflow
+Group=netflow
+Restart=on-failure
+GuessMainPID=yes
+TimeoutStopSec=20
+ExecStart=/usr/local/netflow/bin/ipfixd --log=local1 --nofork \
+    --verbose --verbose \
+    --port=2055:/netflow/hh-router/save \
+    --port=2057:/netflow/lerner-core1/save \
+
+[Install]
+WantedBy=multi-user.target

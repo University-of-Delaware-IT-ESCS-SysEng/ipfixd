@@ -1,0 +1,29 @@
+{
+    netflow_root_path: <dir>,
+    default_rename_timeout: <seconds>,
+    default_cflowd: 0|1,
+    default_ipfix: 0|1,
+    verbose: 0..9,
+    nofork: 0|1,
+    user: <username>,
+    group: <groupname>,
+    log: <syslog fac.level>,
+    log_unchanged_templates: 0|1,
+    log_datarec: 0|1
+
+    writers: [
+            { name: <name>,
+              temp_path: <path>,
+              dest_path: <path>,
+              rename_timeout: <secs>,
+              cflowd: 0/1,
+              ipfix: 0/1
+            },...
+            ],
+    readers: [
+            { name: <name>,
+              port: 1-65535,
+              writer: <defined-writer-name>
+            },..
+            ]
+}
