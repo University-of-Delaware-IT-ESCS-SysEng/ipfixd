@@ -128,9 +128,9 @@ systemd:
 	chown root:root /etc/ipfixd
 	chmod 770 /etc/ipfixd
 
-	echo "LOG=local1" > /etc/ipfixd/ipfixd.conf
-	chown root:root /etc/ipfixd/ipfixd.conf
-	chmod 660 /etc/ipfixd/ipfixd.conf
+#	echo "LOG=local1" > /etc/ipfixd/ipfixd.conf
+#	chown root:root /etc/ipfixd/ipfixd.conf
+#	chmod 660 /etc/ipfixd/ipfixd.conf
 
 	cp ipfixd.service /etc/systemd/system/
 	chown root:root /etc/systemd/system/ipfixd.service
