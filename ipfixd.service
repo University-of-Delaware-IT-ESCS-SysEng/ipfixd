@@ -10,7 +10,8 @@ Group=netflow
 EnvironmentFile=/etc/ipfixd/ipfixd.conf
 ExecStart=/usr/local/bin/ipfixd --nofork -vv --log=$LOG $PORTS
 ExecReload=kill -HUP $MAINPID
-ExecStop=kill -INT $MAINPID
+ExecStop=kill -TERM $MAINPID
+TimeoutStopSec=10
 Restart=always
 
 [Install]
