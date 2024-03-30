@@ -1,0 +1,17 @@
+[Unit]
+Description=NetFlow Packet Receiver and Processor
+Wants=network.target network-online.target
+After=network.target network-online.target
+
+[Service]
+Type=simple
+User=netflow
+Group=netflow
+EnvironmentFile=/etc/ipfixd/ipfixd.conf
+ExecStart=/usr/local/bin/ipfixd --nofork -vv --log=$LOG $PORTS
+ExecReload=kill -HUP $MAINPID
+ExecStop=kill -INT $MAINPID
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
