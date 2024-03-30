@@ -111,7 +111,9 @@ def parse_args():
 
     p = argparse.ArgumentParser( description = 
         "Daemon that reads ipfix data from routers and switches and "
-        "writes output files every so many minutes." )
+        "writes output files every so many minutes. When run as a daemon, "
+        "you will need to start as root.  Typically, specify a --user and "
+        "--group to drop privs after startup." )
 
     p.add_argument( '--ports', '-p',
         required=True,

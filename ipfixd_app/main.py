@@ -68,8 +68,9 @@ import socket
 import os
 import signal
 import daemon
-import pidfile
 import traceback
+import grp
+import pwd
 #import gc
 
 import ipfixd_app.args
@@ -102,6 +103,7 @@ def main():
 
     ipfixd_app.ipfixd_log.set_logging( None )       # Basic stderr logging
     cmdparse = ipfixd_app.args.parse_args()
+    ipfixd_app.ipfixd_log.set_logging( cmdparse )   # Logging set by args
 
 #    gc.disable()                                    # I hope we don't need this
 
@@ -109,14 +111,18 @@ def main():
         daemon_args = {}
         daemon_args[ 'umask' ] = 0o027
         daemon_args[ 'prevent_core' ] = True
-        daemon_args[ 'pidfile' ] = pidfile.PidFile('/var/run/ipfixd.pid')
 
         if cmdparse.user:
             daemon_args[ 'uid' ] = pwd.getpwnam( cmdparse.user ).pw_uid
         if cmdparse.group:
-            daemon_args[ 'gid' ] = pwd.getpwnam( cmdparse.group ).pw_gid
+            daemon_args[ 'gid' ] = grp.getgrnam( cmdparse.group ).gr_gid
 
-        with daemon.DaemonContext( **daemon_args ):
+        context = daemon.DaemonContext( **daemon_args )
+
+        log().info( 'Starting Daemon.' )
+
+        with context:
+            log().info( 'Started Daemon.' )
             try:
                 _main( cmdparse )
             except SystemExit:
@@ -335,5 +341,14 @@ def term_handler( signal, frame ):
             pass
 
     hup_handler( signal, frame )
+
+#
+# Main program startup.
+#
+
+try:
+    exit( main() )
+except KeyboardInterrupt:
+    pass
 
 # End.

@@ -58,7 +58,7 @@ cdef class ByteMover:
 
     cdef int _byte_mover( self,
         uint8_t * in_buffer,
-        uint8_t * out_buffer ) nogil
+        uint8_t * out_buffer ) noexcept nogil
 
 
 cdef class ByteMoverNetflowV5( ByteMover ):

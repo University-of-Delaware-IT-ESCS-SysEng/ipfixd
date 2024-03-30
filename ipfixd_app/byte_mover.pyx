@@ -4,7 +4,7 @@ This is cython module.  It needs to be converted to C and compiled before use.
 
 import cython
 
-cimport byte_mover
+cimport ipfixd_app.byte_mover
 
 from libc.stdint cimport uint8_t, uint16_t, uint32_t, uint64_t
 from libc.string cimport memcpy
@@ -243,7 +243,7 @@ cdef class ByteMover:
 
     cdef int _byte_mover( self,
         uint8_t * in_buffer,
-        uint8_t * out_buffer ) nogil:
+        uint8_t * out_buffer ) noexcept nogil:
 
         """
         This routine actually moves the bytes from the input buffers

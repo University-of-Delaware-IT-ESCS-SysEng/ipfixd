@@ -28,7 +28,7 @@ cdef extern from "arpa/inet.h":
 cdef extern from "arpa/inet.h":
     uint16_t ntohs( uint16_t )
 
-cimport byte_mover
+cimport ipfixd_app.byte_mover
 
 def netflow_version( uint8_t * buff ):
     """
@@ -44,7 +44,7 @@ def v5_header_len():
 
     return( 24 )
 
-def v5_header( uint8_t * buff, byte_mover.ByteMoverNetflowV5 bm ):
+def v5_header( uint8_t * buff, ipfixd_app.byte_mover.ByteMoverNetflowV5 bm ):
 
     """
     This routine parses a Netflow version 5 header.  It also sets
