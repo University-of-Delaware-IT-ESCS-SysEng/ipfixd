@@ -1,5 +1,5 @@
-#!/usr/bin/python3.11 -tt 
-
+#!/bin/bash
+env PYTHONPATH=. env/bin/python -m ipfixd_app.main $* << EOF
 import ipfixd_app.main
 import cProfile
 
@@ -7,3 +7,4 @@ try:
     exit( cProfile.run( 'ipfixd_app.main.main()' ) )
 except KeyboardInterrupt:
     pass
+EOF
