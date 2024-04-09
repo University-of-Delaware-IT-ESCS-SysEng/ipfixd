@@ -8,8 +8,8 @@ Type=simple
 User=netflow
 Group=netflow
 EnvironmentFile=/etc/ipfixd/ipfixd.conf
-ExecStart=/usr/local/bin/ipfixd --nofork -vv --log=$LOG $PORTS
-ExecReload=kill -HUP $MAINPID
+ExecStart=/usr/local/sbin/ipfixd --nofork -vv --log=$LOG $PORTS
+#ExecReload=kill -HUP $MAINPID
 ExecStop=kill -TERM $MAINPID
 TimeoutStopSec=10
 Restart=always
